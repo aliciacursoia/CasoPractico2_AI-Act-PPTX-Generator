@@ -21,6 +21,6 @@ pip install python-pptx
 # Ejecuta el script
 python generate_ai_act_ppt.py
 
-## 🚀 Resultado
+### 2. Resultado
 
 El script generará un archivo llamado CasoPractico2_AliciaB_Reglamento_IA_Act.pptx en la misma carpeta.
