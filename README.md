@@ -22,10 +22,10 @@ pip install python-pptx
 python generate_ai_act_ppt.py
 ```
 
-### 2. Resultado
+### 2. Descarga en entorno local
 
 El script generará un archivo llamado CasoPractico2_AliciaB_Reglamento_IA_Act.pptx en la misma carpeta.
 
-### 3. Descarga
+### 3. Descarga en entorno Colab
 
 Si se utiliza el notebook de Colab, se puede descargar la pptx en el menú que se habilita a la izquierda, en Archivos.
