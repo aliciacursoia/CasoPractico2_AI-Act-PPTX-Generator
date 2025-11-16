@@ -4,8 +4,9 @@ from pptx.enum.text import PP_ALIGN
 from pptx.dml.color import RGBColor
 from pptx.enum.shapes import MSO_SHAPE, MSO_CONNECTOR
 
+# --- CONSTANTES DE DISEÑO ---
 COURSE_FOOTER = (
-    "CasoPractico2 - AliciaBeamud -  ‘Programación con Inteligencia Artificial: Introducción y gestión con LLMs –"
+    "Curso ‘Programación con Inteligencia Artificial: Introducción y gestión con LLMs – INAP’"
 )
 TITLE_COLOR = RGBColor(20, 40, 80)      # Azul oscuro
 ACCENT = RGBColor(71, 134, 226)         # Azul didáctico
@@ -13,6 +14,8 @@ ACCENT_SOFT = RGBColor(227, 238, 255)   # Azul muy claro
 TEXT_COLOR = RGBColor(40, 40, 40)
 MUTED = RGBColor(110, 120, 130)
 
+
+# --- FUNCIONES DE AYUDA ---
 
 def add_footer(prs, slide, page_num=None):
     """Añade un pie de página institucional y número de diapositiva."""
@@ -38,20 +41,21 @@ def add_footer(prs, slide, page_num=None):
         p2.alignment = PP_ALIGN.RIGHT
 
 
+# --- DIAPOSITIVA 1: PORTADA (FINAL CORREGIDA) ---
 def title_slide(prs, title, subtitle):
     slide = prs.slides.add_slide(prs.slide_layouts[6])  # en blanco
     w, h = prs.slide_width, prs.slide_height
 
-    # Banda superior
+    # Banda superior azul (fondo): AUMENTADA A 2.0 PULGADAS
     band = slide.shapes.add_shape(
-        MSO_SHAPE.RECTANGLE, 0, 0, w, Inches(1.6)
+        MSO_SHAPE.RECTANGLE, 0, 0, w, Inches(2.0) 
     )
     band.fill.solid()
     band.fill.fore_color.rgb = ACCENT
     band.line.fill.background()
 
-    # Título
-    tx = slide.shapes.add_textbox(Inches(0.7), Inches(0.35), w - Inches(1.4), Inches(0.9))
+    # Título: POSICIÓN Y AJUSTADA
+    tx = slide.shapes.add_textbox(Inches(0.7), Inches(0.45), w - Inches(1.4), Inches(1.1)) 
     tf = tx.text_frame
     tf.clear()
     p = tf.paragraphs[0]
@@ -60,8 +64,8 @@ def title_slide(prs, title, subtitle):
     p.font.bold = True
     p.font.color.rgb = RGBColor(255, 255, 255)
 
-    # Subtítulo / curso
-    tx2 = slide.shapes.add_textbox(Inches(0.7), Inches(1.4), w - Inches(1.4), Inches(0.6))
+    # Subtítulo / curso: POSICIÓN Y AJUSTADA
+    tx2 = slide.shapes.add_textbox(Inches(0.7), Inches(1.6), w - Inches(1.4), Inches(0.6))
     tf2 = tx2.text_frame
     tf2.clear()
     s = tf2.paragraphs[0]
@@ -69,17 +73,10 @@ def title_slide(prs, title, subtitle):
     s.font.size = Pt(16)
     s.font.color.rgb = RGBColor(245, 245, 245)
 
-    # Panel de contenido ligeramente sombreado
-    panel = slide.shapes.add_shape(
-        MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.7), Inches(2.2), w - Inches(1.4), h - Inches(3.2)
-    )
-    panel.fill.solid()
-    panel.fill.fore_color.rgb = ACCENT_SOFT
-    panel.line.color.rgb = ACCENT
-
     add_footer(prs, slide, page_num=1)
 
 
+# --- DIAPOSITIVAS DE CONTENIDO (CON WORD_WRAP) ---
 def bullet_slide(prs, title, bullets, is_index=False):
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     w, h = prs.slide_width, prs.slide_height
@@ -94,16 +91,15 @@ def bullet_slide(prs, title, bullets, is_index=False):
     p.font.bold = True
     p.font.color.rgb = TITLE_COLOR
     
-    # Añade una línea horizontal decorativa que usa el color ACCENT
+    # Línea de acento
     line = slide.shapes.add_shape(
         MSO_SHAPE.RECTANGLE, Inches(0.7), Inches(1.2), Inches(3.5), Inches(0.05)
     )
     line.fill.solid()
     line.fill.fore_color.rgb = ACCENT
     line.line.fill.background()
-    # =======================================================
 
-    # Caja de contenido
+    # Caja de contenido (Fondo blanco)
     box = slide.shapes.add_shape(
         MSO_SHAPE.ROUNDED_RECTANGLE, Inches(0.7), Inches(1.5), w - Inches(1.4), h - Inches(2.4)
     )
@@ -111,10 +107,11 @@ def bullet_slide(prs, title, bullets, is_index=False):
     box.fill.fore_color.rgb = RGBColor(255, 255, 255)
     box.line.color.rgb = ACCENT
 
-    # Viñetas
-    tx = slide.shapes.add_textbox(Inches(1.0), Inches(1.8), w - Inches(2.0), h - Inches(2.8))
+    # Viñetas: Word_wrap aplicado
+    tx = slide.shapes.add_textbox(Inches(1.0), Inches(1.8), w - Inches(2.6), h - Inches(2.8))
     tf2 = tx.text_frame
     tf2.clear()
+    tf2.word_wrap = True 
     
     font_size = Pt(20) if is_index else Pt(20)
     
@@ -161,7 +158,7 @@ def section_break_slide(prs, title):
     p2.font.size = Pt(14)
     p2.font.color.rgb = RGBColor(230, 230, 230)
     p2.alignment = PP_ALIGN.CENTER
-    
+
 
 def two_columns_slide(prs, title, left_title, left_items, right_title, right_items):
     slide = prs.slides.add_slide(prs.slide_layouts[6])
@@ -172,6 +169,7 @@ def two_columns_slide(prs, title, left_title, left_items, right_title, right_ite
     p.text = title
     p.font.size = Pt(30); p.font.bold = True; p.font.color.rgb = TITLE_COLOR
 
+    # Línea de acento
     line = slide.shapes.add_shape(
         MSO_SHAPE.RECTANGLE, Inches(0.7), Inches(1.2), Inches(3.5), Inches(0.05)
     )
@@ -190,6 +188,7 @@ def two_columns_slide(prs, title, left_title, left_items, right_title, right_ite
 
     list_l = slide.shapes.add_textbox(Inches(0.9), Inches(2.2), col_w - Inches(0.7), h - Inches(3.0))
     tf = list_l.text_frame; tf.clear()
+    tf.word_wrap = True 
     for i, it in enumerate(left_items):
         para = tf.paragraphs[0] if i == 0 else tf.add_paragraph()
         para.text = it; para.font.size = Pt(18); para.font.color.rgb = TEXT_COLOR
@@ -204,6 +203,7 @@ def two_columns_slide(prs, title, left_title, left_items, right_title, right_ite
 
     list_r = slide.shapes.add_textbox(x_r + Inches(0.2), Inches(2.2), col_w - Inches(0.7), h - Inches(3.0))
     tf2 = list_r.text_frame; tf2.clear()
+    tf2.word_wrap = True 
     for i, it in enumerate(right_items):
         para = tf2.paragraphs[0] if i == 0 else tf2.add_paragraph()
         para.text = it; para.font.size = Pt(18); para.font.color.rgb = TEXT_COLOR
@@ -211,6 +211,7 @@ def two_columns_slide(prs, title, left_title, left_items, right_title, right_ite
     add_footer(prs, slide, page_num=len(prs.slides))
 
 
+# --- FUNCIÓN PRINCIPAL DE CONSTRUCCIÓN ---
 def build_presentation():
     prs = Presentation()
     prs.slide_width = Inches(13.33)
@@ -339,7 +340,7 @@ def build_presentation():
         ],
     )
 
-    file_name = "CasoPractico2_AliciaB_Reglamento_IA_Act.pptx"
+    file_name = "Reglamento_IA_Act_INAP_Final.pptx"
     prs.save(file_name)
     print(f"✔ Presentación generada: {file_name}")
 
