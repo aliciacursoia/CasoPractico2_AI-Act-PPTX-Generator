@@ -20,6 +20,7 @@ Si lo usas Localmente (en tu PC):
 pip install python-pptx
 # Ejecuta el script
 python generate_ai_act_ppt.py
+```
 
 ### 2. Resultado
 
