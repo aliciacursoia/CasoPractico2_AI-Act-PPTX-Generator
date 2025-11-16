@@ -6,7 +6,7 @@ from pptx.enum.shapes import MSO_SHAPE, MSO_CONNECTOR
 
 # --- CONSTANTES DE DISEÑO ---
 COURSE_FOOTER = (
-    "Curso ‘Programación con Inteligencia Artificial: Introducción y gestión con LLMs – INAP’"
+    "CasoPractico2 - AliciaBeamud -  ‘Programación con Inteligencia Artificial: Introducción y gestión con LLMs –"
 )
 TITLE_COLOR = RGBColor(20, 40, 80)      # Azul oscuro
 ACCENT = RGBColor(71, 134, 226)         # Azul didáctico
@@ -340,7 +340,7 @@ def build_presentation():
         ],
     )
 
-    file_name = "Reglamento_IA_Act_INAP_Final.pptx"
+    file_name = "CasoPractico2_AliciaB_Reglamento_IA_Act.pptx"
     prs.save(file_name)
     print(f"✔ Presentación generada: {file_name}")
 
