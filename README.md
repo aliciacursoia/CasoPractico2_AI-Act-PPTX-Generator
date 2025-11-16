@@ -25,3 +25,7 @@ python generate_ai_act_ppt.py
 ### 2. Resultado
 
 El script generará un archivo llamado CasoPractico2_AliciaB_Reglamento_IA_Act.pptx en la misma carpeta.
+
+### 3. Descarga
+
+Si se utiliza el notebook de Colab, se puede descargar la pptx en el menú que se habilita a la izquierda, en Archivos.
